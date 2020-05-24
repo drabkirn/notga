@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import EasyMDE from 'easymde';
 
+import { easyMDEOptions } from '../Shared/defaults';
+
+import 'easymde/dist/easymde.min.css';
 
 function Show(props) {
   const notes = useState(
@@ -8,17 +12,21 @@ function Show(props) {
       {
         id: 1,
         title: "first",
-        content: "abcd",
-        previewContent: "efgh"
+        content: "abcd"
       },
       {
         id: 2,
         title: "second",
-        content: "1234",
-        previewContent: "5678"
+        content: "Hello world, this is `my message` to you!"
       }
     ]
   );
+
+  const [noteContentRender, setNoteContentRender] = useState(null);
+
+  useEffect(() => {
+    handleEasyMDE();
+  }, []);
 
   const noteIdParam = parseInt(props.match.params.id);
   if(!noteIdParam) {
@@ -30,12 +38,27 @@ function Show(props) {
     return <Redirect to="/dash" />
   }
 
+  const handleEasyMDE = () => {
+    const noteContentElement = document.getElementById('noteContent');
+    const updatedEasyMDEOptions = {...easyMDEOptions, element: noteContentElement, initialValue: note[0].content};
+    const myEasyMDE = new EasyMDE(updatedEasyMDEOptions);
+    setNoteContentRender(myEasyMDE.options.previewRender(myEasyMDE.value()));
+    myEasyMDE.toTextArea();
+  };
+
   return(
     <div>
       <h3>This is Show page</h3>
       <p>Title: { note[0].title }</p>
       <p>Content: { note[0].content }</p>
-      <p>prevContent: { note[0].previewContent }</p>
+
+      <div className="editor-preview editor-preview-side editor-preview-active-side" style={{ position: "static", width: "100%", marginTop: "20px" }}>
+        <div dangerouslySetInnerHTML={{ __html: noteContentRender }} ></div>
+      </div>
+
+      <div>
+        <textarea name="noteContent" id="noteContent" style={ { visibility: "hidden" } }></textarea>
+      </div>
     </div>
   );
 };
