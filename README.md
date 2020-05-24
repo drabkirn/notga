@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <img src="https://github.com/drabkirn/notga/raw/master/drabkirn-logo-120x120.png"/>
+</div>
 
-## Available Scripts
+# Drabkirn Notga
 
-In the project directory, you can run:
+<!-- TODO: Add short moto -->
+> Coming soon...
 
-### `yarn start`
+<!-- Add languages, CI/CD, main frameworks used from shields.io. Example -->
+[![React 16.13.1](https://img.shields.io/badge/React-v16.13.1-blue.svg)](https://reactjs.org/)
+[![Issues](https://img.shields.io/github/issues/drabkirn/notga.svg)](https://github.com/drabkirn/notga/issues)
+[![Issues closed](https://img.shields.io/github/issues-closed/drabkirn/notga.svg)](https://github.com/drabkirn/notga/issues)
+[![Pulls](https://img.shields.io/github/issues-pr/drabkirn/notga.svg)](https://github.com/drabkirn/notga/pulls)
+[![Pulls closed](https://img.shields.io/github/issues-pr-closed/drabkirn/notga.svg)](https://github.com/drabkirn/notga/pulls)
+[![License](https://img.shields.io/github/license/drabkirn/notga.svg)](https://choosealicense.com/licenses/agpl-3.0/)
+[![CLA assistant](https://cla-assistant.io/readme/badge/drabkirn/notga)](https://cla-assistant.io/drabkirn/notga)
+[![Dependabot](https://badgen.net/dependabot/drabkirn/notga?icon=dependabot)]()
+[![Code size](https://img.shields.io/github/languages/code-size/drabkirn/notga)]()
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<!-- TODO: Full Description of Project goes here -->
+Coming soon...
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+-----
+-----
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Table of Contents
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [Connect](#connect)
 
-### `yarn build`
+-----
+-----
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
+<!-- TODO: Change these steps to mirror your repo's installation -->
+**coming soon...**
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+-----
+-----
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contributing
+If you would like to contribute, please check [this contributing guide](https://github.com/drabkirn/notga/blob/master/CONTRIBUTING.md)
 
-### `yarn eject`
+Please check [this Code of Conduct guide](https://github.com/drabkirn/notga/blob/master/CODE_OF_CONDUCT.md) before contributing or having any kind of discussion(issues, pull requests etc.) with the Notga project!
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-----
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Connect:
+Need any help? Have any Questions? Or just say us hi!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. [Drabkirn Website](https://go.cdadityang.xyz/drab)
+2. [Our Blog](https://go.cdadityang.xyz/blog)
+3. [Discord Server](https://go.cdadityang.xyz/discord)
+4. [Twitter](https://go.cdadityang.xyz/DtwtK)
+5. [Instagram](https://go.cdadityang.xyz/DinsK)
