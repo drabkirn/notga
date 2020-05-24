@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import EasyMDE from 'easymde';
 
 import { easyMDEOptions } from '../Shared/defaults';
+import Highlight from '../Shared/Highlight';
 
 import 'easymde/dist/easymde.min.css';
 
@@ -53,7 +54,7 @@ function Show(props) {
       <p>Content: { note[0].content }</p>
 
       <div className="editor-preview editor-preview-side editor-preview-active-side" style={{ position: "static", width: "100%", marginTop: "20px" }}>
-        <div dangerouslySetInnerHTML={{ __html: noteContentRender }} ></div>
+        <Highlight content={ noteContentRender }></Highlight>
       </div>
 
       <div>
