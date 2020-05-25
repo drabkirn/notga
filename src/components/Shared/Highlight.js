@@ -7,8 +7,6 @@ import hljs from 'highlight.js/lib/index';
 function Highlight(props) {
   const nodeRef = createRef();
 
-  console.log(props.content);
-
   useEffect(() => {
     initHighlightJS();
   }, [props.content]);

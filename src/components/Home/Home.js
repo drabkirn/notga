@@ -1,15 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { isUserSignedIn } from '../Shared/defaults';
+
 function Home() {
   return(
     <div>
       <h3>This is home page</h3>
-      <Link to="/new">New Note</Link>
+      {
+        isUserSignedIn ? (
+          <Link to="/dash">Dash</Link>
+        ) : (
+          <Link to="/login">Login</Link>
+        )
+      }
       <br /><br />
-      <Link to="/show/1">Show Note</Link>
-      <br /><br />
-      <Link to="/dash">Dash</Link>
     </div>
   );
 };
