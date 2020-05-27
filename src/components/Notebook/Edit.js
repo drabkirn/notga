@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import EasyMDE from 'easymde';
 
 import { userSession, isUserSignedIn, easyMDEOptions } from '../Shared/defaults';
 import { fetchNotebookFile, postNotebookFile } from '../../store/actions/notesAction';
+import Navbar from '../Shared/Navbar';
+import Loading from '../Shared/Loading';
+import Footer from '../Shared/Footer';
 
 import 'easymde/dist/easymde.min.css';
 
@@ -81,25 +84,45 @@ function Edit(props) {
   const loading = notes.isFetching;
 
   return(
-    <div>
-      <h3>This is Edit page</h3>
-      {
-        loading || !note ? ("loading...") : (
-          <form onSubmit={ (e) => handleSubmit(e) }>
-            <div>
-              <label htmlFor="title">Title</label>
-              <input type="text" id="title" name="title" value={ noteTitle } onChange={ (e) => setNoteTitle(e.target.value) } minLength="3" maxLength="30" required />
-            </div>
+    <>
+      <Navbar />
 
-            <div>
-              <textarea id="noteContent"></textarea>
-            </div>
+      <section className="container mt-3rem">
+        {
+          loading || !note ? (
+            <Loading />
+          ) : (
+            <>
+              <form onSubmit={ (e) => handleSubmit(e) } className="form-tag" >
+                <div className="form-tag-title-field">
+                  <input type="text" id="title" name="title" value={ noteTitle } onChange={ (e) => setNoteTitle(e.target.value) } minLength="3" maxLength="25" required placeholder="Note Title" className="validate" />
+                </div>
 
-            <button type="submit">Submit</button>
-          </form>
-        )
-      }
-    </div>
+                <div className="mt-3rem">
+                  <textarea id="noteContent"></textarea>
+                </div>
+
+                <div className="center-align mt-2rem">
+                  <button type="submit" className="btn forest-green-btn">
+                    Update
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </form>
+
+              <div className="center-align mt-2rem">
+                <Link to={ "/show/" + note.id } className="btn apple-red-btn">
+                  Cancel
+                  <i class="material-icons right">backspace</i>
+                </Link>
+              </div>
+            </>
+          )
+        }
+      </section>
+
+      <Footer />
+    </>
   );
 };
 

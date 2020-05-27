@@ -1,0 +1,233 @@
+@import 'config';
+
+
+// Defaults
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Source Code Pro', monospace;
+  color: $rich_black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Rubik Mono One', sans-serif;
+}
+
+h1 {
+  font-size: 3.5rem;
+  margin: 2rem 0 1.6rem 0;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin: 1.5rem 0 1.3rem 0;
+}
+
+h3 {
+  font-size: 2rem;
+  margin: 1.5rem 0 1.3rem 0;
+}
+
+h4 {
+  font-size: 1.6rem;
+}
+
+h5 {
+  font-size: 1.4rem;
+}
+
+h6 {
+  font-size: 1.2rem;
+}
+
+hr {
+  color: $white;
+  margin: 3rem 0;
+}
+
+
+
+// Helpers
+@each $key, $font-size in $font-amounts {
+  .fs-#{$key} {
+    font-size: #{$font-size}rem;
+  }
+}
+
+@each $key, $margin-size in $margin-amounts {
+  .mt-#{$key} {
+    margin-top: #{$margin-size}rem;
+  }
+  
+  .ml-#{$key} {
+    margin-left: #{$margin-size}rem;
+  }
+}
+
+@each $key, $color in $available-colors-list {
+  .#{$key}-btn, .#{$key}-btn:hover, .#{$key}-btn:focus {
+    @include set-background($color);
+  }
+
+  .#{$key}-bg {
+    @include set-background($color);
+  }
+
+  .#{$key}-text {
+    color: $color !important;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+
+// Navbar
+nav.custom-nav {
+  box-shadow: none;
+  border-bottom: 1px solid lightgray;
+
+  .brand-logo {
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    h4 {
+      margin: 0;
+    }
+  }
+
+  ul li a {
+    color: $rich_black;
+  }
+
+  ul a:hover {
+    @include set-background($tea_green);
+  }
+}
+
+ul.custom-sidenav {
+  @include set-background($oxford_blue);
+
+  li a {
+    color: $white;
+  }
+
+  li a:hover {
+    @include set-background($tea_green);
+  }
+}
+
+
+
+// Home Header
+header {
+  margin-top: 5rem !important;
+
+  h1 {
+    margin: 1.5rem 0;
+  }
+}
+
+
+
+// Login
+.login-section {
+  height: 78vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+// Dash
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.dash-notes {
+  & &-card {
+    display: block;
+    padding: 1rem 0;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    @include set-background($oxford_blue);
+  }
+}
+
+
+
+// Show
+.show-note-metadata {
+  background-color: $honey_dew;
+  padding: 0.5rem 0;
+  border-radius: 3rem;
+}
+
+.custom-editor-preview {
+  position: static;
+  margin-top: 2rem;
+  width: 100%;
+  padding-left: 1.3rem;
+}
+
+
+
+// New/Edit
+.form-tag {
+  & &-title-field {
+    margin: 0 auto;
+    max-width: 650px;
+
+    input {
+      font-family: 'Rubik Mono One', sans-serif;
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
+}
+
+
+
+// Footer
+footer {
+  @include set-background($apple_red);
+
+  & .row {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: $white;
+    text-decoration: underline;
+  }
+
+  & .footer-right {
+    height: 63px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+
+
+@import 'media';

@@ -5,6 +5,10 @@ import { Person } from 'blockstack';
 
 import { appConfig, userSession, isUserSignedIn } from '../Shared/defaults';
 import { fetchNotebookFile } from '../../store/actions/notesAction';
+import Navbar from '../Shared/Navbar';
+import Loading from '../Shared/Loading';
+import FloatingIcon from '../Shared/FloatingIcon';
+import Footer from '../Shared/Footer';
 
 function Dash() {
   // Get the Redux Dispatch
@@ -23,56 +27,70 @@ function Dash() {
     return <Redirect to="/login" />;
   }
 
-  const handleSignout = (e) => {
-    e.preventDefault();
-    userSession.signUserOut();
-    window.location = appConfig.redirectURI();
-  };
-
   const userData = userSession.loadUserData();
   const userProfile = new Person(userData.profile);
   const username = userData.username;
-  const userFullName = userProfile.name() ? userProfile.name() : "Anonymous Dragon";
-  const userDescription = userProfile.description() ? userProfile.description() : "I'm just a Anonymous Dragon writing my notes over here";
+  const usernameorFullName = userProfile.name() ? userProfile.name() : username;
   const userAvatarURL = userProfile.avatarUrl() ? userProfile.avatarUrl() : `${appConfig.appDomain}/icons/avatar.png`;
 
   const NotesLoading = notes.isFetching;
 
   return(
-    <div>
-      <h3>This is Dash page</h3>
-      <button onClick={ (e) => handleSignout(e) }>Signout</button>
-      <div>
-        <p>Your info:</p>
-        <p>{ username }</p>
-        <p>{ userFullName }</p>
-        <p>{ userDescription }</p>
-        <img src={ userAvatarURL } alt="my avatar" width="250" height="250" />
+    <>
+      <Navbar />
+
+      <section className="container center-align mt-3rem">
+        <div>
+          <h2>Dashboard</h2>
+        </div>
+
+        <div>
+          <img src={ userAvatarURL } alt="my avatar" className="profile-avatar" />
+          <p className="fs-1-2 bold">Welcome, { usernameorFullName }!</p>
+          <a href="https://browser.blockstack.org/profiles" target="_blank" rel="noopener noreferrer" className="btn forest-green-btn">
+            Edit Profile
+            <i className="material-icons right">edit</i>
+          </a>
+        </div>
+      </section>
+
+      <div className="container">
+        <hr />
       </div>
 
-      {
-        NotesLoading ? ("loading...") : (
-          <div>
-            <Link to="/new">New Note</Link>
+      <section className="container">
+        {
+          NotesLoading ? (
+            <Loading />
+          ) : (
+            <>
+              <div className="center-align">
+                <h2>Your notes</h2>
+              </div>
 
-            <p>Below are your notes:</p>
-            <ul>
-              {
-                notesData && notesData.map((note) => {
-                  return(
-                    <React.Fragment key={note.id}>
-                      <li>
-                        <Link to={ "/show/" + note.id }>{ note.title }</Link> | <Link to={ "/edit/" + note.id }>Edit</Link>
-                      </li>
-                    </React.Fragment>
-                  );
-                })
-              }
-            </ul>
-          </div>
-        )
-      }
-    </div>
+              <div className="row mt-2rem dash-notes">
+                {
+                  notesData && notesData.map((note) => {
+                    return(
+                      <div key={note.id} className="col s12 m4">
+                        <Link to={ "/show/" + note.id } className="dash-notes-card center-align">
+                          <p className="fs-1-1 bold uppercase">{ note.title }</p>
+                        </Link>
+                      </div>
+                    );
+                  })
+                }
+                
+              </div>
+            </>
+          )
+        }
+      </section>
+
+      <FloatingIcon />
+
+      <Footer />
+    </>
   );
 };
 

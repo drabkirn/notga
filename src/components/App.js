@@ -8,6 +8,9 @@ import New from './Notebook/New';
 import Edit from './Notebook/Edit';
 import Show from './Notebook/Show';
 
+import 'materialize-css/dist/css/materialize.min.css';
+import './Assets/scss/App.scss';
+
 function App() {
   return (
     <Switch>

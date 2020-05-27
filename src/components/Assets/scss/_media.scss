@@ -1,0 +1,44 @@
+@media only screen and (max-width: 992px) {
+  // Navbar
+  nav.custom-nav {
+    .brand-logo {
+      margin-left: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  // Defaults
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2.2rem;
+  }
+  
+  h3 {
+    font-size: 1.8rem;
+  }
+
+  // New/Edit
+  .form-tag {
+    & &-title-field {
+      input {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+
+  // Footer
+  footer {
+    & .footer-left {
+      text-align: center;
+    }
+    
+    & .footer-right {
+      justify-content: center;
+    }
+  }
+}

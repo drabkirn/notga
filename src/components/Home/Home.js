@@ -1,21 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { isUserSignedIn } from '../Shared/defaults';
+import Navbar from '../Shared/Navbar';
+import Footer from '../Shared/Footer';
 
 function Home() {
   return(
-    <div>
-      <h3>This is home page</h3>
-      {
-        isUserSignedIn ? (
-          <Link to="/dash">Dash</Link>
-        ) : (
-          <Link to="/login">Login</Link>
-        )
-      }
-      <br /><br />
-    </div>
+    <React.Fragment>
+      <Navbar />
+
+      <header className="container center-align">
+        <div>
+          <img src="/icons/dbk/drabkirn-logo-192x192.png" alt="drabkirn logo" className="responsive-img" />
+        </div>
+        <div>
+          <h1>Notga</h1>
+        </div>
+        <div>
+          <p className="fs-1-2 bold">Take free, private, secure, unlimited, decentralized and end-to-end encrypted notes. What else do you need? <span role="img" aria-label="Thinking emoji">🤔️</span></p>
+        </div>
+      </header>
+
+      <Footer />
+    </React.Fragment>
   );
 };
 

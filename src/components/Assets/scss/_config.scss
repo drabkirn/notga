@@ -1,0 +1,44 @@
+// Colors
+$white: #FFFFFF;
+$oxford_blue: #04052E;
+$rich_black: #02010A;
+$apple_red: #F40000;
+$forest_green: #248232;
+$honey_dew: #D7F3E5;
+$tea_green: #D3F9B5;
+
+$available-colors-list: (
+  "white": $white,
+  "oxford-blue": $oxford_blue,
+  "rich-black": $rich_black,
+  "apple-red": $apple_red,
+  "forest-green": $forest_green,
+  "honey-dew": $honey_dew,
+  "tea-green": $tea_green
+);
+
+$font-amounts: (
+  "1-1": 1.1,
+  "1-2": 1.2
+);
+
+$margin-amounts: (
+  "1rem": 1,
+  "2rem": 2,
+  "3rem": 3
+);
+
+// Set text color based on BG
+@function set-text-color($color) {
+  @if(lightness($color) >= 50) {
+    @return $rich_black;
+  } @else {
+    @return $white;
+  } 
+}
+
+// Set BG and text color
+@mixin set-background($color) {
+  background-color: $color !important;
+  color: set-text-color($color) !important;
+}
