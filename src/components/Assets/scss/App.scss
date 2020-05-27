@@ -64,6 +64,10 @@ hr {
   .ml-#{$key} {
     margin-left: #{$margin-size}rem;
   }
+
+  .mb-#{$key} {
+    margin-bottom: #{$margin-size}rem;
+  }
 }
 
 @each $key, $color in $available-colors-list {
@@ -90,6 +94,16 @@ hr {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.flex-center-vh {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.block {
+  display: block;
 }
 
 

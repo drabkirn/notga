@@ -58,7 +58,7 @@ function Dash() {
         <hr />
       </div>
 
-      <section className="container">
+      <section className="container mb-10rem">
         {
           NotesLoading ? (
             <Loading />
@@ -67,6 +67,17 @@ function Dash() {
               <div className="center-align">
                 <h2>Your notes</h2>
               </div>
+
+              {
+                notesData.length === 0 ? (
+                  <div className="row">
+                    <div className="col m6 offset-m3 s12">
+                      <p className="fs-1-1">It's lonely over here, start writing a new note by click on + icon from bottom right...</p>
+                      <img src="/icons/illustrations/lonely.svg" alt="lonely illustration" className="responsive-img" />
+                    </div>
+                  </div>
+                ) : (<></>)
+              }
 
               <div className="row mt-2rem dash-notes">
                 {

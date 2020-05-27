@@ -38,13 +38,13 @@ function Navbar() {
             {
               isUserSignedIn ? (
                 <>
-                  <li><Link to="/">Home</Link></li>
+                  <li><Link to="/#tour">Tour</Link></li>
                   <li><Link to="/dash">Dash</Link></li>
                   <li><Link to="#" onClick={ (e) => handleSignout(e) }>Sign out</Link></li>
                 </>
               ) : (
                 <>
-                  <li><Link to="/">Home</Link></li>
+                  <li><Link to="/#tour">Tour</Link></li>
                   <li><Link to="/login">Get started</Link></li>
                 </>
               )
@@ -57,14 +57,14 @@ function Navbar() {
         {
           isUserSignedIn ? (
             <>
-              <li><Link to="/" onClick={ () => handleSideNav() }>Home</Link></li>
+              <li><Link to="/#tour" onClick={ () => handleSideNav() }>Tour</Link></li>
               <li><Link to="/dash" onClick={ () => handleSideNav() }>Dash</Link></li>
               <li><Link to="#" onClick={ (e) => handleSignout(e) }>Sign out</Link></li>
             </>
           ) : (
             <>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/login">Get started</Link></li>
+              <li><Link to="/#tour" onClick={ () => handleSideNav() }>Tour</Link></li>
+              <li><Link to="/login" onClick={ () => handleSideNav() }>Get started</Link></li>
             </>
           )
         }

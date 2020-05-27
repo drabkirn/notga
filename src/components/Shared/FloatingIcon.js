@@ -11,13 +11,18 @@ function FloatingIcon() {
           const bodyTag = document.querySelector('body');
   
           const bodyHeight = bodyTag.clientHeight;
+          const windowWidth = window.innerWidth;
           const windowHeight = window.innerHeight;
   
           const scrollingDifference = bodyHeight - windowHeight;
           const scrollTopPosition = document.scrollingElement.scrollTop;
   
           if(scrollTopPosition >= scrollingDifference) {
-            fixedActionBtn.style.bottom = "70px";
+            if(windowWidth <= 600) {
+              fixedActionBtn.style.bottom = "130px";
+            } else {
+              fixedActionBtn.style.bottom = "70px";
+            }
           } else {
             fixedActionBtn.style.bottom = "23px";
           }

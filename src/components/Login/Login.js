@@ -39,7 +39,9 @@ function Login() {
       <section className="container">
         <div className="login-section center-align">
           <div>
-            <p className="italic">Get started with your blockstack account, we mentioned the perks to you!</p>
+            <p className="italic">
+              Get started by signing in with Blockstack. If you don't have one, you can create a new one. It's super fast and straightforward.
+            </p>
           </div>
           <div>
             <button className="btn btn-large oxford-blue-btn" onClick={ (e) => handleLogin(e) } disabled={ loading } >

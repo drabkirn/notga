@@ -21,6 +21,13 @@
     font-size: 1.8rem;
   }
 
+
+  // Helpers
+  .flex-center-vh {
+    display: block;
+  }
+
+
   // New/Edit
   .form-tag {
     & &-title-field {
