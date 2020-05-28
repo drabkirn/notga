@@ -37,7 +37,7 @@ function Home() {
       <section className="container mt-5rem" id="tour">
         <div className="row flex-center-vh">
           <div className="col m6 s12">
-            <img src="/icons/illustrations/privacy.svg" alt="privacy illustration" className="responsive-img" />
+            <img src="/images/illustrations/privacy.svg" alt="privacy illustration" className="responsive-img" />
           </div>
 
           <div className="col m6 s12">
@@ -69,13 +69,13 @@ function Home() {
           </div>
 
           <div className="col m6 s12">
-            <img src="/icons/illustrations/factory.svg" alt="how it works illustration" className="responsive-img" />
+            <img src="/images/illustrations/factory.svg" alt="how it works illustration" className="responsive-img" />
           </div>
         </div>
 
         <div className="row flex-center-vh show-on-small hide-on-med-and-up">
           <div className="col m6 s12">
-            <img src="/icons/illustrations/factory.svg" alt="how it works illustration" className="responsive-img" />
+            <img src="/images/illustrations/factory.svg" alt="how it works illustration" className="responsive-img" />
           </div>
 
           <div className="col m6 s12">
@@ -98,7 +98,7 @@ function Home() {
       <section className="container mt-5rem" id="storage">
         <div className="row flex-center-vh">
           <div className="col m6 s12">
-            <img src="/icons/illustrations/storage.svg" alt="storage illustration" className="responsive-img" />
+            <img src="/images/illustrations/storage.svg" alt="storage illustration" className="responsive-img" />
           </div>
 
           <div className="col m6 s12">
@@ -122,13 +122,13 @@ function Home() {
           </div>
 
           <div className="col m6 s12">
-            <img src="/icons/illustrations/notebook.svg" alt="notebook illustration" className="responsive-img" />
+            <img src="/images/illustrations/notebook.svg" alt="notebook illustration" className="responsive-img" />
           </div>
         </div>
 
         <div className="row flex-center-vh show-on-small hide-on-med-and-up">
           <div className="col m6 s12">
-            <img src="/icons/illustrations/notebook.svg" alt="notebook illustration" className="responsive-img" />
+            <img src="/images/illustrations/notebook.svg" alt="notebook illustration" className="responsive-img" />
           </div>
 
           <div className="col m6 s12">
@@ -145,7 +145,7 @@ function Home() {
       <section className="container mt-5rem">
         <div className="row flex-center-vh">
           <div className="col m6 s12">
-            <img src="/icons/illustrations/lockin.svg" alt="lockin illustration" className="responsive-img" />
+            <img src="/images/illustrations/lockin.svg" alt="lockin illustration" className="responsive-img" />
           </div>
 
           <div className="col m6 s12">
@@ -172,13 +172,13 @@ function Home() {
           </div>
 
           <div className="col m6 s12">
-            <img src="/icons/illustrations/set-it-free.svg" alt="set-it-free illustration" className="responsive-img" />
+            <img src="/images/illustrations/set-it-free.svg" alt="set-it-free illustration" className="responsive-img" />
           </div>
         </div>
 
         <div className="row flex-center-vh show-on-small hide-on-med-and-up">
           <div className="col m6 s12">
-            <img src="/icons/illustrations/set-it-free.svg" alt="set-it-free illustration" className="responsive-img" />
+            <img src="/images/illustrations/set-it-free.svg" alt="set-it-free illustration" className="responsive-img" />
           </div>
 
           <div className="col m6 s12">

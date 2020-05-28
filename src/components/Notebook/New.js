@@ -77,7 +77,7 @@ function New() {
           <div className="center-align mt-2rem">
             <button type="submit" className="btn forest-green-btn">
               Create
-              <i class="material-icons right">send</i>
+              <i className="material-icons right">send</i>
             </button>
           </div>
         </form>
@@ -85,7 +85,7 @@ function New() {
         <div className="center-align mt-2rem">
           <Link to="/dash" className="btn apple-red-btn">
             Cancel
-            <i class="material-icons right">backspace</i>
+            <i className="material-icons right">backspace</i>
           </Link>
         </div>
       </section>
