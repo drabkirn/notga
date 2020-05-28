@@ -5,7 +5,7 @@
 # Drabkirn Notga
 
 <!-- TODO: Add short moto -->
-> Coming soon...
+> Take free, private, secure, unlimited, end-to-end encrypted, and decentralized notes in markdown/WYSIWYG editor. What else do you need?
 
 <!-- Add languages, CI/CD, main frameworks used from shields.io. Example -->
 [![React 16.13.1](https://img.shields.io/badge/React-v16.13.1-blue.svg)](https://reactjs.org/)
@@ -19,8 +19,9 @@
 [![Code size](https://img.shields.io/github/languages/code-size/drabkirn/notga)]()
 
 <!-- TODO: Full Description of Project goes here -->
-Coming soon...
+Take unlimited private notes in markdown or WYSIWYG(What You See Is What You Get) editor. Powered by Blockstack technology, so it's decentralized and encrypted.
 
+**[Visit website here](https://go.cdadityang.xyz/notga)**
 
 -----
 -----
