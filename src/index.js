@@ -1,28 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Router, BrowserRouter } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import PiwikReactRouter from 'piwik-react-router';
 
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 import rootReducer from './store/reducers/rootReducer';
-
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
+import history from './components/Shared/history';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={ store }>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+if(process.env.NODE_ENV === "production") {
+  // Matomo/Piwik Setup
+  const piwik = PiwikReactRouter({
+    url: 'https://analytics.cdadityang.xyz',
+    siteId: 3
+  });
+
+  ReactDOM.render(
+    <React.StrictMode>
+      <Provider store={ store }>
+        <Router history={piwik.connectToHistory(history)}>
+          <App />
+        </Router>
+      </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+} else {
+  ReactDOM.render(
+    <React.StrictMode>
+      <Provider store={ store }>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
