@@ -24,7 +24,7 @@ if(process.env.NODE_ENV === "production") {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={ store }>
-        <Router history={piwik.connectToHistory(history)}>
+        <Router history={piwik.connectToHistory(history)} basename={process.env.PUBLIC_URL}>
           <App />
         </Router>
       </Provider>
@@ -35,7 +35,7 @@ if(process.env.NODE_ENV === "production") {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={ store }>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <App />
         </BrowserRouter>
       </Provider>

@@ -2,7 +2,7 @@ import { AppConfig, UserSession } from 'blockstack';
 
 const myAppConfig = new AppConfig(["store_write"]);
 
-if(process.env.NODE_ENV === "development") myAppConfig.appDomain = "http://localhost:3000";
+if(process.env.NODE_ENV === "development") myAppConfig.appDomain = "http://localhost:3000/notga";
 else myAppConfig.appDomain = "https://drabkirn.cdadityang.xyz/notga";
 
 myAppConfig.redirectPath = "/login";
