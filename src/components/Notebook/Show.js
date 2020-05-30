@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import EasyMDE from 'easymde';
 
-import { appConfig, userSession, isUserSignedIn, easyMDEOptions } from '../Shared/defaults';
+import { appConfig, userSession, isUserSignedIn, easyMDEOptions, handleImagesRender } from '../Shared/defaults';
 import Highlight from '../Shared/Highlight';
 import { fetchNotebookFile, postNotebookFile } from '../../store/actions/notesAction';
 import Loading from '../Shared/Loading';
@@ -50,6 +50,10 @@ function Show(props) {
     const myEasyMDE = new EasyMDE(updatedEasyMDEOptions);
     setNoteContentRender(myEasyMDE.options.previewRender(myEasyMDE.value()));
     myEasyMDE.toTextArea();
+
+    setTimeout(() => {
+      handleImagesRender(userSession);
+    }, 2000);
   };
 
   const handleNoteDelete = (deletedNote) => {

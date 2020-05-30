@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import EasyMDE from 'easymde';
 
-import { userSession, isUserSignedIn, easyMDEOptions } from '../Shared/defaults';
+import { userSession, isUserSignedIn, easyMDEOptions, handleImagesRender } from '../Shared/defaults';
 import { fetchNotebookFile, postNotebookFile } from '../../store/actions/notesAction';
 import Navbar from '../Shared/Navbar';
 import Loading from '../Shared/Loading';
@@ -51,8 +51,20 @@ function Edit(props) {
 
   const handleEasyMDE = (note) => {
     const noteContentElement = document.getElementById('noteContent');
-    const updatedEasyMDEOptions = {...easyMDEOptions, element: noteContentElement, initialValue: note.content};
+    const updatedEasyMDEOptions = {...easyMDEOptions, element: noteContentElement, initialValue: note.content, previewRender: (text) => customMarkdownRender(text)};
     new EasyMDE(updatedEasyMDEOptions);
+
+    const noteContentElement1 = document.getElementById('noteContent1');
+    const updatedEasyMDEOptions1 = {...easyMDEOptions, element: noteContentElement1, initialValue: note.content };
+    const myEasyMDE1 = new EasyMDE(updatedEasyMDEOptions1);
+    myEasyMDE1.toTextArea();
+
+    const customMarkdownRender = (text) => {
+      setTimeout(() => {
+        handleImagesRender(userSession);
+      }, 1000);
+      return myEasyMDE1.options.previewRender(text);
+    };
   };
 
   const handleSubmit = (e) => {
@@ -100,6 +112,10 @@ function Edit(props) {
 
                 <div className="mt-3rem">
                   <textarea id="noteContent"></textarea>
+                </div>
+
+                <div>
+                  <textarea id="noteContent1" style={ { visibility: "hidden" }}></textarea>
                 </div>
 
                 <div className="center-align mt-2rem">
