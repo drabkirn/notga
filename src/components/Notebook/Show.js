@@ -95,15 +95,15 @@ function Show(props) {
               </div>
 
               <div className="mt-2rem center-align">
-                <Link to={ "/edit/" + note.id } className="btn forest-green-btn">
+                <Link to={ "/edit/" + note.id } className="btn forest-green-btn edit-btn">
                   Edit
                   <i className="material-icons right">edit</i>
                 </Link>
-                <button className="btn apple-red-btn ml-1rem" onClick={ () => handleNoteDelete(note) }>
+                <button className="btn apple-red-btn ml-1rem delete-btn" onClick={ () => handleNoteDelete(note) }>
                   Delete
                   <i className="material-icons right">delete</i>
                 </button>
-                <Link to="/dash" className="btn ml-1rem oxford-blue-btn">
+                <Link to="/dash" className="btn ml-1rem oxford-blue-btn back-btn">
                   Back
                   <i className="material-icons right">keyboard_backspace</i>
                 </Link>

@@ -27,9 +27,30 @@ Take unlimited private notes in markdown or WYSIWYG(What You See Is What You Get
 -----
 
 ## Table of Contents
+- [Features](#features)
 - [Installation](#installation)
 - [Contributing](#contributing)
 - [Connect](#connect)
+
+-----
+-----
+
+## Features
+* Unlimited Notes
+* Unlimited Storage
+* What You See Is What You Get(WYSIWYG) Editor or Markdown Editor
+* Drag and drop Images or Copy-Paste Images
+* Truly End-to-End encrypted notes
+* Keyboard shortcuts:
+  * `ctrl + O` (O for orange): Takes you to homepage
+  * `ctrl + B`: Takes you Back
+  * `ctrl + Y`: New Note
+  * `ctrl + E`: Edit Note
+  * `ctrl + S`: Save Note
+  * `ctrl + D`: Delete Note
+  * `ctrl + 1` to `ctrl + 9`: When you're on dashboard, you can select to show first 9 notes with shortcut.
+* Powered by Blockstack Technology
+* You decide where you store your data(Defaults to Gaia provided by blockstack)
 
 -----
 -----

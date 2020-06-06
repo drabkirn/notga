@@ -21,7 +21,28 @@ function Dash() {
 
   useEffect(() => {
     if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile(userSession));
+
+    if(isUserSignedIn && notesData) {
+      document.addEventListener('keydown', keyboardShortcutsHandler);
+
+      return () => {
+        document.removeEventListener('keydown', keyboardShortcutsHandler);
+      }
+    }
   }, [notesData]);
+
+  const keyboardShortcutsHandler = (e) => {
+    if(e.key < 1 && e.key > 9) {
+      return;
+    }
+
+    if((e.key === e.key) && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      const dncIndex = document.querySelector(`.dnc-${e.key}`);
+  
+      if(dncIndex) dncIndex.click();
+    }
+  };
 
   if(!isUserSignedIn) {
     return <Redirect to="/login" />;
@@ -81,10 +102,10 @@ function Dash() {
 
               <div className="row mt-2rem dash-notes">
                 {
-                  notesData && notesData.map((note) => {
+                  notesData && notesData.map((note, index) => {
                     return(
                       <div key={note.id} className="col s12 m4">
-                        <Link to={ "/show/" + note.id } className="dash-notes-card center-align">
+                        <Link to={ "/show/" + note.id } className={ "dash-notes-card center-align dnc-" + (index + 1) }>
                           <p className="fs-1-1 bold uppercase">{ note.title }</p>
                         </Link>
                       </div>

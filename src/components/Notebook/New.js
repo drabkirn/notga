@@ -3,8 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import EasyMDE from 'easymde';
 
-import { userSession, isUserSignedIn } from '../Shared/defaults';
-import { easyMDEOptions } from '../Shared/defaults';
+import { userSession, isUserSignedIn, easyMDEOptions } from '../Shared/defaults';
 import generateUUID from '../Shared/generateUUID';
 import { fetchNotebookFile, postNotebookFile } from '../../store/actions/notesAction';
 import Navbar from '../Shared/Navbar';
@@ -83,7 +82,7 @@ function New() {
         </form>
 
         <div className="center-align mt-2rem">
-          <Link to="/dash" className="btn apple-red-btn">
+          <Link to="/dash" className="btn apple-red-btn back-btn">
             Cancel
             <i className="material-icons right">backspace</i>
           </Link>

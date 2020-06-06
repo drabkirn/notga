@@ -127,7 +127,7 @@ function Edit(props) {
               </form>
 
               <div className="center-align mt-2rem">
-                <Link to={ "/show/" + note.id } className="btn apple-red-btn">
+                <Link to={ "/show/" + note.id } className="btn apple-red-btn back-btn">
                   Cancel
                   <i className="material-icons right">backspace</i>
                 </Link>
