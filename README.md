@@ -41,6 +41,7 @@ Take unlimited private notes in markdown or WYSIWYG(What You See Is What You Get
 * What You See Is What You Get(WYSIWYG) Editor or Markdown Editor
 * Drag and drop Images or Copy-Paste Images
 * Truly End-to-End encrypted notes
+* Add and search tags
 * Keyboard shortcuts:
   * `ctrl + O` (O for orange): Takes you to homepage
   * `ctrl + B`: Takes you Back

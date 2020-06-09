@@ -74,7 +74,8 @@ function Edit(props) {
   const handleEasyMDE = (note) => {
     const noteContentElement = document.getElementById('noteContent');
     const updatedEasyMDEOptions = {...easyMDEOptions, element: noteContentElement, initialValue: note.content, previewRender: (text) => customMarkdownRender(text)};
-    new EasyMDE(updatedEasyMDEOptions);
+    const isMDEInited = document.querySelector('.editor-toolbar');
+    if(!isMDEInited) new EasyMDE(updatedEasyMDEOptions);
 
     const noteContentElement1 = document.getElementById('noteContent1');
     const updatedEasyMDEOptions1 = {...easyMDEOptions, element: noteContentElement1, initialValue: note.content };
@@ -108,7 +109,7 @@ function Edit(props) {
   };
 
   const handleTagsData = () => {
-    const processedTagsArr = noteTags.length > 0 ? [...new Set(noteTags.split(",").map((b) => b.trim().toLowerCase()))] : "";
+    const processedTagsArr = noteTags.length > 0 ? [...new Set(noteTags.split(",").map((b) => b.trim().toLowerCase()).filter(Boolean))] : "";
 
     if(tagsData.length === 0) {
       processedTagsArr.forEach((pTagName) => {
@@ -171,6 +172,7 @@ function Edit(props) {
   }
 
   const loading = notes.isFetching;
+  console.log(tagsData);
 
   return(
     <>
@@ -191,11 +193,11 @@ function Edit(props) {
                   <textarea id="noteContent"></textarea>
                 </div>
 
-                <div>
+                <div style={ { height: "10px" } }>
                   <textarea id="noteContent1" style={ { visibility: "hidden" }}></textarea>
                 </div>
 
-                <div className="form-tag-title-field">
+                <div className="form-tag-tag-field">
                   <input type="text" id="tags" name="tags" value={ noteTags } onChange={ (e) => setNoteTags(e.target.value) } placeholder="Tag 1, Tag 2" className="validate" />
                 </div>
 

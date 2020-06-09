@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, createRef, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { Person } from 'blockstack';
@@ -23,6 +23,10 @@ function Dash() {
 
   const tags = store.tags;
   const tagsData = tags.tagsData;
+
+  const tagNameRef = createRef();
+
+  const [tagNotes, setTagNotes] = useState(null);
 
   useEffect(() => {
     if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile(userSession));
@@ -62,6 +66,35 @@ function Dash() {
   
       if(dncIndex) dncIndex.click();
     }
+  };
+
+  const handleTagSearchSubmit = (e) => {
+    e.preventDefault();
+    const tagName = tagNameRef.current.value;
+    const noteIDS = [];
+    const customTagNotes = [];
+    tagsData.forEach((tagData) => {
+      if(tagData.name === tagName) {
+        noteIDS.push(...tagData.note_ids);
+      }
+    });
+    if(noteIDS.length !== 0) {
+      notesData.forEach((noteData) => {
+        if(noteIDS.includes(noteData.id)) {
+          customTagNotes.push(noteData);
+        }
+      });
+
+      setTagNotes(customTagNotes);
+    } else {
+      setTagNotes(null);
+    }
+  };
+
+  const handleTagSearchClear = (e) => {
+    e.preventDefault();
+    setTagNotes(null);
+    tagNameRef.current.value = "";
   };
 
   if(!isUserSignedIn) {
@@ -120,13 +153,70 @@ function Dash() {
                 ) : (<></>)
               }
 
+              {
+                tagsData && tagsData.length !== 0 ? (
+                  <section>
+                    <div className="row">
+                      <form className="col s12 m8 offset-m2 l8 offset-l3" onSubmit={ (e) => handleTagSearchSubmit(e) }>
+                        <div className="row">
+                          <div className="input-field col s7">
+                            <i className="material-icons prefix">timeline</i>
+                            <input type="text" id="autocomplete-input" className="autocomplete" autoComplete="off" ref={ tagNameRef } />
+                            <label htmlFor="autocomplete-input">Tags</label>
+                          </div>
+
+                          <div className="col s5">
+                            <button type="submit" className="btn forest-green-btn dash-tag-submit-btn">
+                              <i className="material-icons right">search</i>
+                            </button>
+                            <button className="btn apple-red-btn dash-tag-submit-btn" onClick={ (e) => handleTagSearchClear(e) }>
+                              <i className="material-icons right">clear</i>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </section>
+                ) : ("")
+              }
+
               <div className="row mt-2rem dash-notes">
                 {
-                  notesData && notesData.map((note, index) => {
+                  notesData && !tagNotes && notesData.map((note, index) => {
                     return(
-                      <div key={note.id} className="col s12 m4">
+                      <div key={note.id} className="col s12 m4 dash-notes-col-m4-nth-clear">
                         <Link to={ "/show/" + note.id } className={ "dash-notes-card center-align dnc-" + (index + 1) }>
                           <p className="fs-1-1 bold uppercase">{ note.title }</p>
+                          <p>
+                            {
+                              tagsData && tagsData.map((tagData, idx) => {
+                                return tagData.note_ids.includes(note.id) ? (
+                                  <span key={ idx } className="dash-note-tags">{ tagData.name }</span>
+                                ) : ("")
+                              })
+                            }
+                          </p>
+                        </Link>
+                      </div>
+                    );
+                  })
+                }
+
+                {
+                  notesData && tagNotes && tagNotes.map((note, index) => {
+                    return(
+                      <div key={note.id} className="col s12 m4 dash-notes-col-m4-nth-clear">
+                        <Link to={ "/show/" + note.id } className={ "dash-notes-card center-align dnc-" + (index + 1) }>
+                          <p className="fs-1-1 bold uppercase">{ note.title }</p>
+                          <p>
+                            {
+                              tagsData && tagsData.map((tagData, idx) => {
+                                return tagData.note_ids.includes(note.id) ? (
+                                  <span key={ idx } className="dash-note-tags">{ tagData.name }</span>
+                                ) : ("")
+                              })
+                            }
+                          </p>
                         </Link>
                       </div>
                     );

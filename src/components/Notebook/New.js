@@ -71,7 +71,7 @@ function New() {
   };
 
   const handleTagsData = () => {
-    const processedTagsArr = noteTags.length > 0 ? [...new Set(noteTags.split(",").map((b) => b.trim().toLowerCase()))] : "";
+    const processedTagsArr = noteTags.length > 0 ? [...new Set(noteTags.split(",").map((b) => b.trim().toLowerCase()).filter(Boolean))] : "";
 
     if(tagsData.length === 0) {
       processedTagsArr.forEach((pTagName) => {
@@ -122,7 +122,7 @@ function New() {
             <textarea id="noteContent"></textarea>
           </div>
 
-          <div className="form-tag-title-field">
+          <div className="form-tag-tag-field">
             <input type="text" id="tags" name="tags" value={ noteTags } onChange={ (e) => setNoteTags(e.target.value) } placeholder="Tag 1, Tag 2" className="validate" />
           </div>
 

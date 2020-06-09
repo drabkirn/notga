@@ -6,7 +6,7 @@ import EasyMDE from 'easymde';
 import { appConfig, userSession, isUserSignedIn, easyMDEOptions, handleImagesRender } from '../Shared/defaults';
 import Highlight from '../Shared/Highlight';
 import { fetchNotebookFile, postNotebookFile } from '../../store/actions/notesAction';
-import { fetchTagsFile } from '../../store/actions/tagsAction';
+import { fetchTagsFile, postTagsFile } from '../../store/actions/tagsAction';
 import Loading from '../Shared/Loading';
 import Navbar from '../Shared/Navbar';
 import FloatingIcon from '../Shared/FloatingIcon';
@@ -79,9 +79,24 @@ function Show(props) {
     const confirmDeletion = window.confirm("Are ou sure, you want to delete this note, it's irreversible?");
     if(confirmDeletion) {
       const modifiedNotesData = notesData.filter((note) => note.id !== deletedNote.id);
+
+      handleTagsRemoveNote(deletedNote);
+
       dispatch(postNotebookFile(userSession, modifiedNotesData));
+      dispatch(postTagsFile(userSession, tagsData));
       window.location = appConfig.redirectURI();
     }
+  };
+
+  const handleTagsRemoveNote = (deletedNote) => {
+    noteTags.forEach((dTagName) => {
+      tagsData.forEach((tData) => {
+        if(tData.name === dTagName) {
+          const idx = tData.note_ids.indexOf(deletedNote.id);
+          tData.note_ids.splice(idx, 1);
+        }
+      });
+    });
   };
 
   if(!isUserSignedIn) {
@@ -108,13 +123,17 @@ function Show(props) {
                 <h2>{ note.title }</h2>
               </div>
 
-              <div className="show-note-metadata center-align">
-                <p>Created at: { note.created_at }</p>
-                <p>Updated at: { note.updated_at }</p>
+              <div className="mt-2rem center-align">
+                <p>{ noteTags && noteTags.sort((a, b) => a.localeCompare(b)).map((tag, idx) => {
+                  return(
+                    <span key={idx} className="show-note-tags">{ tag }</span>
+                  )
+                }) }</p>
               </div>
 
-              <div>
-                <p>{ noteTags && noteTags.sort((a, b) => a.localeCompare(b)).join(", ") }</p>
+              <div className="show-note-metadata mt-2rem center-align">
+                <p>Created at: { note.created_at }</p>
+                <p>Updated at: { note.updated_at }</p>
               </div>
 
               <div className="mt-2rem center-align">
