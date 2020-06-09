@@ -4,7 +4,7 @@ let initState = {
   err: null
 };
 
-const usersReducer = (state = initState, action) => {
+const notesReducer = (state = initState, action) => {
   switch (action.type){
     case 'NOTEBOOK_FILE_FETCH_SUCCESS':
       return {
@@ -24,4 +24,4 @@ const usersReducer = (state = initState, action) => {
 };
 
 
-export default usersReducer;
+export default notesReducer;

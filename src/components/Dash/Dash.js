@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { Person } from 'blockstack';
+import M from "materialize-css";
 
 import { appConfig, userSession, isUserSignedIn } from '../Shared/defaults';
 import { fetchNotebookFile } from '../../store/actions/notesAction';
+import { fetchTagsFile } from '../../store/actions/tagsAction';
 import Navbar from '../Shared/Navbar';
 import Loading from '../Shared/Loading';
 import FloatingIcon from '../Shared/FloatingIcon';
@@ -19,8 +21,13 @@ function Dash() {
   const notes = store.notes;
   const notesData = notes.notesData;
 
+  const tags = store.tags;
+  const tagsData = tags.tagsData;
+
   useEffect(() => {
     if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile(userSession));
+
+    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile(userSession));
 
     if(isUserSignedIn && notesData) {
       document.addEventListener('keydown', keyboardShortcutsHandler);
@@ -29,14 +36,27 @@ function Dash() {
         document.removeEventListener('keydown', keyboardShortcutsHandler);
       }
     }
-  }, [notesData]);
+  }, [notesData, tagsData]);
+
+  useEffect(() => {
+    if(isUserSignedIn && notesData && tagsData) {
+      const elems = document.querySelectorAll('.autocomplete');
+      const options = {
+        data: {}
+      };
+      tagsData.forEach((tD) => {
+        options.data[tD.name] = null;
+      });
+      const instances = M.Autocomplete.init(elems, options);
+    }
+  }, [notesData, tagsData]);
 
   const keyboardShortcutsHandler = (e) => {
     if(e.key < 1 && e.key > 9) {
       return;
     }
 
-    if((e.key === e.key) && (e.ctrlKey || e.metaKey)) {
+    if((e.key > 0 && e.key < 10) && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
       const dncIndex = document.querySelector(`.dnc-${e.key}`);
   

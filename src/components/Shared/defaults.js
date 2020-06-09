@@ -18,6 +18,8 @@ export const isUserSignedIn = userSession.isUserSignedIn();
 
 export const notebookFileName = "notebook_v1.json";
 
+export const tagsFileName = "tags_v1.json";
+
 
 
 export const easyMDEOptions = {

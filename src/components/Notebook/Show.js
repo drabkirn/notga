@@ -6,6 +6,7 @@ import EasyMDE from 'easymde';
 import { appConfig, userSession, isUserSignedIn, easyMDEOptions, handleImagesRender } from '../Shared/defaults';
 import Highlight from '../Shared/Highlight';
 import { fetchNotebookFile, postNotebookFile } from '../../store/actions/notesAction';
+import { fetchTagsFile } from '../../store/actions/tagsAction';
 import Loading from '../Shared/Loading';
 import Navbar from '../Shared/Navbar';
 import FloatingIcon from '../Shared/FloatingIcon';
@@ -22,14 +23,20 @@ function Show(props) {
   const notes = store.notes;
   const notesData = notes.notesData;
 
+  const tags = store.tags;
+  const tagsData = tags.tagsData;
+
   const noteIdParam = props.match.params.id;
   
   const [noteContentRender, setNoteContentRender] = useState(null);
   const [note, setNote] = useState(null);
   const [noteNotFound, setNoteNotFound] = useState(false);
+  const [noteTags, setNoteTags] = useState("");
 
   useEffect(() => {
     if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile(userSession));
+
+    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile(userSession));
 
     if(isUserSignedIn && notesData) {
       const getCurrentNote = notesData.filter((note) => note.id === noteIdParam)[0];
@@ -42,7 +49,19 @@ function Show(props) {
         setNoteNotFound(true);
       }
     }
-  }, [notesData]);
+
+    if(isUserSignedIn && notesData && tagsData) {
+      const getCurrentNote = notesData.filter((note) => note.id === noteIdParam)[0];
+      const allTags = [];
+
+      tagsData.forEach((tagData) => {
+        if(tagData.note_ids.includes(getCurrentNote.id)) {
+          allTags.push(tagData.name);
+        }
+      });
+      setNoteTags(allTags);
+    }
+  }, [notesData, tagsData]);
 
   const handleEasyMDE = (note) => {
     const noteContentElement = document.getElementById('noteContent');
@@ -92,6 +111,10 @@ function Show(props) {
               <div className="show-note-metadata center-align">
                 <p>Created at: { note.created_at }</p>
                 <p>Updated at: { note.updated_at }</p>
+              </div>
+
+              <div>
+                <p>{ noteTags && noteTags.sort((a, b) => a.localeCompare(b)).join(", ") }</p>
               </div>
 
               <div className="mt-2rem center-align">

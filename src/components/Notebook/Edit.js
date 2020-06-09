@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import EasyMDE from 'easymde';
 
 import { userSession, isUserSignedIn, easyMDEOptions, handleImagesRender } from '../Shared/defaults';
+import generateUUID from '../Shared/generateUUID';
 import { fetchNotebookFile, postNotebookFile } from '../../store/actions/notesAction';
+import { fetchTagsFile, postTagsFile } from '../../store/actions/tagsAction';
 import Navbar from '../Shared/Navbar';
 import Loading from '../Shared/Loading';
 import Footer from '../Shared/Footer';
@@ -20,15 +22,22 @@ function Edit(props) {
   const notes = store.notes;
   const notesData = notes.notesData;
 
+  const tags = store.tags;
+  const tagsData = tags.tagsData;
+
   const noteIdParam = props.match.params.id;
 
   const [note, setNote] = useState(null);
   const [noteTitle, setNoteTitle] = useState("");
+  const [noteTags, setNoteTags] = useState("");
+  const [initialNoteTags, setInitialNoteTags] = useState("");
   const [noteNotFound, setNoteNotFound] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   useEffect(() => {
     if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile(userSession));
+
+    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile(userSession));
 
     if(isUserSignedIn && notesData) {
       const getCurrentNote = notesData.filter((note) => note.id === noteIdParam)[0];
@@ -41,7 +50,20 @@ function Edit(props) {
         setNoteNotFound(true);
       }
     }
-  }, [notesData]);
+
+    if(isUserSignedIn && notesData && tagsData) {
+      const getCurrentNote = notesData.filter((note) => note.id === noteIdParam)[0];
+      const allTags = [];
+
+      tagsData.forEach((tagData) => {
+        if(tagData.note_ids.includes(getCurrentNote.id)) {
+          allTags.push(tagData.name);
+        }
+      });
+      setInitialNoteTags(allTags);
+      setNoteTags(allTags.join(", "));
+    }
+  }, [notesData, tagsData]);
 
   useEffect(() => {
     if(note) {
@@ -77,8 +99,63 @@ function Edit(props) {
         eachNote.updated_at = new Date().toLocaleString();
       }
     });
+
+    handleTagsData();
+
     dispatch(postNotebookFile(userSession, notesData));
+    dispatch(postTagsFile(userSession, tagsData));
     setIsFormSubmitted(true);
+  };
+
+  const handleTagsData = () => {
+    const processedTagsArr = noteTags.length > 0 ? [...new Set(noteTags.split(",").map((b) => b.trim().toLowerCase()))] : "";
+
+    if(tagsData.length === 0) {
+      processedTagsArr.forEach((pTagName) => {
+        const tagData = {
+          id: generateUUID(),
+          name: pTagName,
+          note_ids: [note.id]
+        };
+        tagsData.push(tagData);
+      });
+    } else {
+      if(initialNoteTags.length > processedTagsArr.length) {
+        let deletedTags = initialNoteTags.filter((nT) => !processedTagsArr.includes(nT));
+        deletedTags.forEach((dTagName) => {
+          tagsData.forEach((tData) => {
+            if(tData.name === dTagName) {
+              const idx = tData.note_ids.indexOf(note.id);
+              tData.note_ids.splice(idx, 1);
+            }
+          });
+        });
+      }
+
+      processedTagsArr.forEach((pTagName) => {
+        let updatedPTagName = false;
+        tagsData.forEach((tData) => {
+          if(tData.name === pTagName) {
+            if(!tData.note_ids.includes(note.id)) {
+              tData.note_ids.push(note.id);
+              updatedPTagName = true;
+              return;
+            } else {
+              updatedPTagName = true;
+            }
+          }
+        });
+
+        if(!updatedPTagName) {
+          const tagData = {
+            id: generateUUID(),
+            name: pTagName,
+            note_ids: [note.id]
+          };
+          tagsData.push(tagData);
+        }
+      });
+    }
   };
 
   if(!isUserSignedIn) {
@@ -116,6 +193,10 @@ function Edit(props) {
 
                 <div>
                   <textarea id="noteContent1" style={ { visibility: "hidden" }}></textarea>
+                </div>
+
+                <div className="form-tag-title-field">
+                  <input type="text" id="tags" name="tags" value={ noteTags } onChange={ (e) => setNoteTags(e.target.value) } placeholder="Tag 1, Tag 2" className="validate" />
                 </div>
 
                 <div className="center-align mt-2rem">
