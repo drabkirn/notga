@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { appConfig, userSession, isUserSignedIn } from '../Shared/defaults';
+import { appConfig, userSession, isUserSignedIn, loginPopup } from '../Shared/defaults';
 import Navbar from '../Shared/Navbar';
 import Footer from '../Shared/Footer';
 
@@ -29,7 +29,25 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-    userSession.redirectToSignIn();
+    // Deprecated
+    // userSession.redirectToSignIn();
+
+    const authOptions = {
+      redirectTo: '/dash',
+      onFinish: (authData) => {
+        window.location = appConfig.redirectURI();
+      },
+      onCancel: () => {
+        setLoading(false);
+      },
+      manifestPath: `${ appConfig.redirectURI() }/manifest.json`,
+      appDetails: {
+        name: 'Notga',
+        icon: `${ appConfig.redirectURI().slice(0, (appConfig.redirectURI().length - 6)) }/icons/logo-180x180.png`,
+      },
+    };
+
+    loginPopup(authOptions);
   };
 
   return(

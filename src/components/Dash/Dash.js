@@ -29,9 +29,9 @@ function Dash() {
   const [tagNotes, setTagNotes] = useState(null);
 
   useEffect(() => {
-    if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile(userSession));
+    if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile());
 
-    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile(userSession));
+    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile());
 
     if(isUserSignedIn && notesData) {
       document.addEventListener('keydown', keyboardShortcutsHandler);

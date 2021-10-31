@@ -30,9 +30,9 @@ function New() {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   useEffect(() => {
-    if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile(userSession));
+    if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile());
 
-    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile(userSession));
+    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile());
 
     if(isUserSignedIn && notesData && tagsData) {
       handleEasyMDE();

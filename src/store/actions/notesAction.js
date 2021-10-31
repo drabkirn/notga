@@ -1,9 +1,9 @@
-import { notebookFileName } from '../../components/Shared/defaults';
+import { notebookFileName, userStorage } from '../../components/Shared/defaults';
 
-export const fetchNotebookFile = (userSession) => {
+export const fetchNotebookFile = () => {
   return (dispatch) => {
     const options = { decrypt: true };
-    userSession.getFile(notebookFileName, options)
+    userStorage.getFile(notebookFileName, options)
       .then((res) => {
         const notebookFileData = JSON.parse(res);
         dispatch({
@@ -19,7 +19,7 @@ export const fetchNotebookFile = (userSession) => {
           const initialNotebookData = {
             data: []
           };
-          userSession
+          userStorage
             .putFile(notebookFileName, JSON.stringify(initialNotebookData), newOptions)
               .then(() => {
                 dispatch({
@@ -44,7 +44,7 @@ export const postNotebookFile = (userSession, notebookData) => {
       data: notebookData
     };
 
-    userSession
+    userStorage
       .putFile(notebookFileName, JSON.stringify(allNotesData), options)
         .then(() => {
           dispatch({

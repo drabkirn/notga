@@ -35,9 +35,9 @@ function Edit(props) {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   useEffect(() => {
-    if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile(userSession));
+    if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile());
 
-    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile(userSession));
+    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile());
 
     if(isUserSignedIn && notesData) {
       const getCurrentNote = notesData.filter((note) => note.id === noteIdParam)[0];
@@ -80,7 +80,7 @@ function Edit(props) {
     const noteContentElement1 = document.getElementById('noteContent1');
     const updatedEasyMDEOptions1 = {...easyMDEOptions, element: noteContentElement1, initialValue: note.content };
     const myEasyMDE1 = new EasyMDE(updatedEasyMDEOptions1);
-    myEasyMDE1.toTextArea();
+    // myEasyMDE1.toTextArea();
 
     const customMarkdownRender = (text) => {
       setTimeout(() => {
@@ -193,7 +193,7 @@ function Edit(props) {
                   <textarea id="noteContent"></textarea>
                 </div>
 
-                <div style={ { height: "10px" } }>
+                <div style={ { height: "10px", display: "none" } }>
                   <textarea id="noteContent1" style={ { visibility: "hidden" }}></textarea>
                 </div>
 

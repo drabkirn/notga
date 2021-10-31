@@ -1,9 +1,9 @@
-import { tagsFileName } from '../../components/Shared/defaults';
+import { tagsFileName, userStorage } from '../../components/Shared/defaults';
 
-export const fetchTagsFile = (userSession) => {
+export const fetchTagsFile = () => {
   return (dispatch) => {
     const options = { decrypt: true };
-    userSession.getFile(tagsFileName, options)
+    userStorage.getFile(tagsFileName, options)
       .then((res) => {
         const tagsFileData = JSON.parse(res);
         dispatch({
@@ -19,7 +19,7 @@ export const fetchTagsFile = (userSession) => {
           const initialTagsData = {
             data: []
           };
-          userSession
+          userStorage
             .putFile(tagsFileName, JSON.stringify(initialTagsData), newOptions)
               .then(() => {
                 dispatch({
@@ -44,7 +44,7 @@ export const postTagsFile = (userSession, tagsData) => {
       data: tagsData
     };
 
-    userSession
+    userStorage
       .putFile(tagsFileName, JSON.stringify(allTagsData), options)
         .then(() => {
           dispatch({

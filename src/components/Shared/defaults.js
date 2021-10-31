@@ -1,4 +1,6 @@
-import { AppConfig, UserSession } from 'blockstack';
+import { UserSession, AppConfig } from '@stacks/auth'
+import { showConnect } from '@stacks/connect';
+import { Storage } from '@stacks/storage';
 import generateUUID from './generateUUID';
 
 const myAppConfig = new AppConfig(["store_write"]);
@@ -10,7 +12,11 @@ myAppConfig.redirectPath = "/login";
 
 export const appConfig = myAppConfig;
 
+export const loginPopup = showConnect;
+
 export const userSession = new UserSession({ appConfig: appConfig });
+
+export const userStorage = new Storage({ userSession: userSession });
 
 export const isUserSignedIn = userSession.isUserSignedIn();
 
@@ -77,7 +83,7 @@ async function uploadImage(file, onSuccess, onError) {
 
   const uuid = generateUUID();
   const options = { encrypt: true };
-  await userSession.putFile(`image-${uuid}.${file.type.split("/")[1]}`, file, options)
+  await userStorage.putFile(`image-${uuid}.${file.type.split("/")[1]}`, file, options)
     .then((res) => {
       onSuccess(res);
     })
@@ -96,7 +102,7 @@ export const handleImagesRender = (userSession) => {
     const relativeImageURL = splitURL[splitURLLength - 1];
 
     const options = { decrypt: true };
-    await userSession.getFile(relativeImageURL, options)
+    await userStorage.getFile(relativeImageURL, options)
       .then((res) => {
         const arrayBufferView = new Uint8Array(res);
         const blob = new Blob([ arrayBufferView ], { type: "image/jpeg" });

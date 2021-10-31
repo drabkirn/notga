@@ -34,9 +34,9 @@ function Show(props) {
   const [noteTags, setNoteTags] = useState("");
 
   useEffect(() => {
-    if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile(userSession));
+    if(isUserSignedIn && !notesData) dispatch(fetchNotebookFile());
 
-    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile(userSession));
+    if(isUserSignedIn && !tagsData) dispatch(fetchTagsFile());
 
     if(isUserSignedIn && notesData) {
       const getCurrentNote = notesData.filter((note) => note.id === noteIdParam)[0];
@@ -68,7 +68,7 @@ function Show(props) {
     const updatedEasyMDEOptions = {...easyMDEOptions, element: noteContentElement, initialValue: note.content};
     const myEasyMDE = new EasyMDE(updatedEasyMDEOptions);
     setNoteContentRender(myEasyMDE.options.previewRender(myEasyMDE.value()));
-    myEasyMDE.toTextArea();
+    // myEasyMDE.toTextArea();
 
     setTimeout(() => {
       handleImagesRender(userSession);
@@ -173,7 +173,7 @@ function Show(props) {
           )
         }
         
-        <div>
+        <div style={ { display: "none" } }>
           <textarea name="noteContent" id="noteContent" style={ { visibility: "hidden" } }></textarea>
         </div>
       </section>
