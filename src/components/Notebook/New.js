@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import EasyMDE from 'easymde';
 
-import { userSession, isUserSignedIn, easyMDEOptions } from '../Shared/defaults';
+import { userSession, isUserSignedIn, easyMDEOptions, handleImagesRender } from '../Shared/defaults';
 import generateUUID from '../Shared/generateUUID';
 import { fetchNotebookFile, postNotebookFile } from '../../store/actions/notesAction';
 import { fetchTagsFile, postTagsFile } from '../../store/actions/tagsAction';
@@ -46,9 +46,21 @@ function New() {
   const handleEasyMDE = () => {
     const noteContentElement = document.getElementById('noteContent');
     const isMDEInited = document.querySelector('.editor-toolbar');
-    const updatedEasyMDEOptions = {...easyMDEOptions, element: noteContentElement};
+    const updatedEasyMDEOptions = {...easyMDEOptions, element: noteContentElement, previewRender: (text) => customMarkdownRender(text)};
 
     if(!isMDEInited) new EasyMDE(updatedEasyMDEOptions);
+
+    const noteContentElement1 = document.getElementById('noteContent1');
+    const updatedEasyMDEOptions1 = {...easyMDEOptions, element: noteContentElement1 };
+    const myEasyMDE1 = new EasyMDE(updatedEasyMDEOptions1);
+    // myEasyMDE1.toTextArea();
+
+    const customMarkdownRender = (text) => {
+      setTimeout(() => {
+        handleImagesRender(userSession);
+      }, 1000);
+      return myEasyMDE1.options.previewRender(text);
+    };
   };
 
   const handleSubmit = (e) => {
@@ -120,6 +132,10 @@ function New() {
 
           <div className="mt-3rem">
             <textarea id="noteContent"></textarea>
+          </div>
+
+          <div style={ { height: "10px", display: "none" } }>
+            <textarea id="noteContent1" style={ { visibility: "hidden" }}></textarea>
           </div>
 
           <div className="form-tag-tag-field">

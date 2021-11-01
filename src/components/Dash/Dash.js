@@ -46,7 +46,11 @@ function Dash() {
     if(isUserSignedIn && notesData && tagsData) {
       const elems = document.querySelectorAll('.autocomplete');
       const options = {
-        data: {}
+        data: {},
+        limit: 10,
+        onAutocomplete: (val) => {
+          handleTagSearchSubmit(null, val);
+        }
       };
       tagsData.forEach((tD) => {
         options.data[tD.name] = null;
@@ -68,13 +72,13 @@ function Dash() {
     }
   };
 
-  const handleTagSearchSubmit = (e) => {
-    e.preventDefault();
-    const tagName = tagNameRef.current.value;
+  const handleTagSearchSubmit = (e, tempVal) => {
+    if(e) e.preventDefault();
+    const tagName = tagNameRef.current ? tagNameRef.current.value : tempVal;
     const noteIDS = [];
     const customTagNotes = [];
     tagsData.forEach((tagData) => {
-      if(tagData.name === tagName) {
+      if(tagData.name.includes(tagName)) {
         noteIDS.push(...tagData.note_ids);
       }
     });
@@ -120,7 +124,7 @@ function Dash() {
 
         <div>
           <img src={ userAvatarURL } alt="my avatar" className="profile-avatar" />
-          <p className="fs-1-2 bold">Welcome, { usernameorFullName }!</p>
+          <p className="fs-1-2 bold">Welcome, { usernameorFullName ? usernameorFullName : 'Baaaaaa' }!</p>
           <a href="https://browser.blockstack.org/profiles" target="_blank" rel="noopener noreferrer" className="btn forest-green-btn">
             Edit Profile
             <i className="material-icons right">edit</i>
@@ -157,7 +161,7 @@ function Dash() {
                 tagsData && tagsData.length !== 0 ? (
                   <section>
                     <div className="row">
-                      <form className="col s12 m8 offset-m2 l8 offset-l3" onSubmit={ (e) => handleTagSearchSubmit(e) }>
+                      <form className="col s12 m8 offset-m2 l8 offset-l3" onSubmit={ (e) => handleTagSearchSubmit(e, null) }>
                         <div className="row">
                           <div className="input-field col s7">
                             <i className="material-icons prefix">timeline</i>
