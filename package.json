@@ -15,7 +15,6 @@
     "highlight.js": "^10.4.1",
     "history": "^4.10.1",
     "materialize-css": "^1.0.0",
-    "node-sass": "^7.0.0",
     "piwik-react-router": "^0.12.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -23,7 +22,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sass": "^1.49.9"
   },
   "scripts": {
     "start": "BROWSER=none react-scripts start",
